@@ -560,7 +560,6 @@ public:
     }
 private:
     double prevTrigger = 0;
-    double phase = 0;
     double holdValue=0;
     bool firstRun = 1;
 };
