@@ -548,19 +548,18 @@ public:
 
 class maxiSampleAndHold {
 public:
-    inline double sah(double sigIn, double holdTimeMs) {
-        double holdTimeSamples = convert::msToSamps(holdTimeMs);
+    inline double sah(double sigIn, double triggerIn) {
         
-        if (phase >= holdTimeSamples) {
-            phase -= holdTimeSamples;
+        if ( triggerIn != prevTrigger ){
+            if ( triggerIn > 0 ){
+                holdValue = sigIn;
+            }
         }
-        if (phase < 1.0)
-            holdValue = sigIn;
-        phase++;
+        prevTrigger = triggerIn;
         return holdValue;
     }
 private:
-    double phase = 0;
+    double prevTrigger = 0;
     double holdValue=0;
     bool firstRun = 1;
 };
